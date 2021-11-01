@@ -24,6 +24,9 @@ public class Department {
 	@JsonManagedReference
 	@OneToMany(mappedBy="department", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<User> users = new ArrayList<>();
+	@JsonManagedReference
+	@OneToMany(mappedBy="department", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Event> events = new ArrayList<>();
 
 	public Department() {}
 
@@ -63,6 +66,14 @@ public class Department {
 		this.users = users;
 	}
 	
+	public List<Event> getEvents() {
+		return events;
+	}
+
+	public void setEvents(List<Event> events) {
+		this.events = events;
+	}
+
 	public void addUser(User user) {
 		users.add(user);
 		user.setDepartment(this);
@@ -72,4 +83,15 @@ public class Department {
 		users.remove(user);
 		user.setDepartment(null);
 	}
+	
+	public void addEvent(Event event) {
+		events.add(event);
+		event.setDepartment(this);
+	}
+
+	public void removeEvent(Event event) {
+		events.remove(event);
+		event.setDepartment(null);
+	}
+	
 }

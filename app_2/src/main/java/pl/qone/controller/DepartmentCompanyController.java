@@ -66,7 +66,6 @@ public class DepartmentCompanyController {
 	  }
     
     @PostMapping("/company")
-	@PreAuthorize("hasRole('MODERATOR')")
     public ResponseEntity<?> createCompany(@Valid @RequestBody CompanyRequest compRequest) {
     	
 		if (companyRepository.existsByName(compRequest.getName())) {
