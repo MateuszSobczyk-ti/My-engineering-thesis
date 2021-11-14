@@ -2,6 +2,8 @@ package pl.qone.payload.response;
 
 import java.util.Date;
 
+import pl.qone.model.StatusEventEnum;
+
 
 public class EventResponse {
 	private Long id;
@@ -12,13 +14,18 @@ public class EventResponse {
 	private Date data_end;
 	private String department;
 	private String eventType;
-	private String statusEvent;
+	private StatusEventEnum statusEvent;
 	private String imageData;
 	private long imageSize;
+	private boolean czyZapisano;
+	private boolean czyMoznaZapisac;
+	private boolean czyMoznaOceniac;
+	private int rate;
 	
 	
 	public EventResponse(Long id, String name, String description, int max_number_of_contestant, Date data_start, Date data_end,
-			String department, String eventType, String statusEvent, String imageData, long imageSize) {
+			String department, String eventType, StatusEventEnum statusEvent, String imageData, long imageSize, boolean czyZapisano, 
+			boolean czyMoznaZapisac, boolean czyMoznaOceniac, int rate) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -30,6 +37,10 @@ public class EventResponse {
 		this.statusEvent = statusEvent;
 		this.imageData = imageData;
 		this.imageSize = imageSize;
+		this.czyZapisano = czyZapisano;
+		this.czyMoznaZapisac = czyMoznaZapisac;
+		this.czyMoznaOceniac = czyMoznaOceniac;
+		this.rate = rate;
 	}
 	public Long getId() {
 		return id;
@@ -79,10 +90,10 @@ public class EventResponse {
 	public void setEventType(String eventType) {
 		this.eventType = eventType;
 	}
-	public String getStatusEvent() {
+	public StatusEventEnum getStatusEvent() {
 		return statusEvent;
 	}
-	public void setStatusEvent(String statusEvent) {
+	public void setStatusEvent(StatusEventEnum statusEvent) {
 		this.statusEvent = statusEvent;
 	}
 	public String getImageData() {
@@ -97,6 +108,29 @@ public class EventResponse {
 	public void setImageSize(long imageSize) {
 		this.imageSize = imageSize;
 	}
-	
+	public boolean isCzyZapisano() {
+		return czyZapisano;
+	}
+	public void setCzyZapisano(boolean czyZapisano) {
+		this.czyZapisano = czyZapisano;
+	}
+	public boolean isCzyMoznaZapisac() {
+		return czyMoznaZapisac;
+	}
+	public void setCzyMoznaZapisac(boolean czyMoznaZapisac) {
+		this.czyMoznaZapisac = czyMoznaZapisac;
+	}
+	public boolean isCzyMoznaOceniac() {
+		return czyMoznaOceniac;
+	}
+	public void setCzyMoznaOceniac(boolean czyMoznaOceniac) {
+		this.czyMoznaOceniac = czyMoznaOceniac;
+	}
+	public int getRate() {
+		return rate;
+	}
+	public void setRate(int rate) {
+		this.rate = rate;
+	}
 
 }

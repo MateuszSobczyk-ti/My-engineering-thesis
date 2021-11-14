@@ -9,9 +9,9 @@ public class EventRequest {
 	private int max_number_of_contestant;
 	private Date data_start;
 	private Date data_end;
-	private Long departmentId;
-	private Long eventTypeId;
-	private Long statusEventId;
+	private String departmentId;
+	private String eventTypeId;
+	private String statusEventId;
 	private String imageId;
 	
 	public String getName() {
@@ -44,22 +44,22 @@ public class EventRequest {
 	public void setData_end(Date data_end) {
 		this.data_end = data_end;
 	}
-	public Long getDepartmentId() {
+	public String getDepartmentId() {
 		return departmentId;
 	}
-	public void setDepartmentId(Long departmentId) {
+	public void setDepartmentId(String departmentId) {
 		this.departmentId = departmentId;
 	}
-	public Long getEventTypeId() {
+	public String getEventTypeId() {
 		return eventTypeId;
 	}
-	public void setEventTypeId(Long eventTypeId) {
+	public void setEventTypeId(String eventTypeId) {
 		this.eventTypeId = eventTypeId;
 	}
-	public Long getStatusEventId() {
+	public String getStatusEventId() {
 		return statusEventId;
 	}
-	public void setStatusEventId(Long statusEventId) {
+	public void setStatusEventId(String statusEventId) {
 		this.statusEventId = statusEventId;
 	}
 	public String getImageId() {

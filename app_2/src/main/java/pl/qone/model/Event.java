@@ -57,13 +57,18 @@ public class Event {
 	@OneToMany(mappedBy="event", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<EventImage> images = new ArrayList<>();
 	
+	@JsonManagedReference
+	@OneToMany(mappedBy="event", cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<UserInEvent> users = new ArrayList<>();
+	
 	public Event() {}
 	
-	public Event(String name, String description, Date data_start, Date data_end) {
+	public Event(String name, String description, Date data_start, Date data_end, int contestant) {
 		this.name = name;
 		this.description = description;
 		this.data_start = data_start;
 		this.data_end = data_end;
+		this.max_number_of_contestant = contestant;
 	}
 	
 	public Long getId() {
@@ -143,4 +148,23 @@ public class Event {
 		images.remove(image);
 		image.setEvent(null);
 	}
+
+	public List<UserInEvent> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<UserInEvent> users) {
+		this.users = users;
+	}
+	
+	public void addUser(UserInEvent user) {
+		users.add(user);
+		user.setEvent(this);
+	}
+	
+	public void removeUser(UserInEvent user) {
+		users.remove(user);
+		user.setEvent(null);
+	}
+	
 }

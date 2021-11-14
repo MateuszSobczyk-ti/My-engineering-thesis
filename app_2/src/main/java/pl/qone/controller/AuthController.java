@@ -76,7 +76,7 @@ public class AuthController {
 		List<String> roles = userDetails.getAuthorities().stream()
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
-
+ 
 		String depName = userDetails.getDepartment() == null ? null : userDetails.getDepartment().getName();
 		String compName = userDetails.getCompany() == null ? null : userDetails.getCompany().getName();
 		String compNip = userDetails.getCompany() == null ? null : userDetails.getCompany().getNip();

@@ -6,6 +6,8 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,8 +25,9 @@ public class StatusEvent {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(name="name", nullable=false, length=50)
-	private String name;
+	@Enumerated(EnumType.STRING)
+	@Column(name="name", nullable=false)
+	private StatusEventEnum name;
 	
 	@Column(name="description", length=300)
 	private String description;
@@ -35,7 +38,7 @@ public class StatusEvent {
 	
 	public StatusEvent() {}
 	
-	public StatusEvent(String name, String description) {
+	public StatusEvent(StatusEventEnum name, String description) {
 		this.name = name;
 		this.description = description;
 	}
@@ -48,11 +51,11 @@ public class StatusEvent {
 		this.id = id;
 	}
 
-	public String getName() {
+	public StatusEventEnum getName() {
 		return name;
 	}
 
-	public void setName(String name) {
+	public void setName(StatusEventEnum name) {
 		this.name = name;
 	}
 
