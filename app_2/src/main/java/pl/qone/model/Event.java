@@ -40,6 +40,10 @@ public class Event {
 	@Basic
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data_end;
+	@Column(length=2048)
+	private String comments;
+	@Column(length=200)
+	private String place;
 	
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -63,12 +67,13 @@ public class Event {
 	
 	public Event() {}
 	
-	public Event(String name, String description, Date data_start, Date data_end, int contestant) {
+	public Event(String name, String description, Date data_start, Date data_end, int contestant, String place) {
 		this.name = name;
 		this.description = description;
 		this.data_start = data_start;
 		this.data_end = data_end;
 		this.max_number_of_contestant = contestant;
+		this.place = place;
 	}
 	
 	public Long getId() {
@@ -137,6 +142,22 @@ public class Event {
 
 	public void setImages(List<EventImage> images) {
 		this.images = images;
+	}
+
+	public String getComments() {
+		return comments;
+	}
+
+	public void setComments(String comments) {
+		this.comments = comments;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace(String place) {
+		this.place = place;
 	}
 
 	public void addImage(EventImage image) {

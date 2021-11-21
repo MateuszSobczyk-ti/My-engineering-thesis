@@ -13,6 +13,8 @@ public class EventRequest {
 	private String eventTypeId;
 	private String statusEventId;
 	private String imageId;
+	private String comment;
+	private String place;
 	
 	public String getName() {
 		return name;
@@ -67,6 +69,18 @@ public class EventRequest {
 	}
 	public void setImageId(String imageId) {
 		this.imageId = imageId;
+	}
+	public String getComment() {
+		return comment;
+	}
+	public void setComment(String comment) {
+		this.comment = comment;
+	}
+	public String getPlace() {
+		return place;
+	}
+	public void setPlace(String place) {
+		this.place = place;
 	}
 
 }

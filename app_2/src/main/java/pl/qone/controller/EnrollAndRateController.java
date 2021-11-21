@@ -44,7 +44,9 @@ public class EnrollAndRateController {
 	@PreAuthorize("hasRole('USER')")
 	public ResponseEntity<MessageResponse> enrollToEvent(@Valid @RequestBody EnrollRequest enrollRequest) {
 		RoleInEventEnum role;
+		User user = null;
 		String message = "";
+		
 		switch (enrollRequest.getRoleInEvent()) {
 		case "contestant":
 			role = RoleInEventEnum.CONTESTANT;
@@ -70,10 +72,17 @@ public class EnrollAndRateController {
 			}
 			
 			if (enrollRequest.getUserId() != null) {
-				User user = userRepository.findById(Long.valueOf(enrollRequest.getUserId())).orElse(null);
-				if (user != null) {
-					user.addUser(userInEvent);
+				user = userRepository.findById(Long.valueOf(enrollRequest.getUserId())).orElse(null);
+			} else {
+				Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+				if (!(authentication instanceof AnonymousAuthenticationToken)) {
+					String currentPrincipalName = authentication.getName();
+					user = userRepository.findByUsername(currentPrincipalName).orElse(null);
 				}
+			}
+			
+			if (user != null) {
+				user.addUser(userInEvent);
 			}
 			
 			try {
