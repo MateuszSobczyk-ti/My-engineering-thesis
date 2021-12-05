@@ -22,7 +22,16 @@ public interface UserInEventRepository extends JpaRepository<UserInEvent, Long>{
 	
 	UserInEvent findByEventAndRoleInEvent(Event event, RoleInEventEnum roleInEvent);
 	 
-	 @Query("SELECT COUNT(u) FROM UserInEvent u WHERE u.event=:event")
-	 int countContestantInEvent(@Param("event") Event event);
+	@Query("SELECT COUNT(u) FROM UserInEvent u WHERE u.event=:event")
+	int countContestantInEvent(@Param("event") Event event);
+	 
+	@Query("SELECT AVG(u.eventRate) FROM UserInEvent u WHERE u.event=:event AND u.eventRate>=1 AND u.eventRate <=5")
+	Double averageEventRate(@Param("event") Event event);
+	
+	@Query("SELECT AVG(u.eventRate) FROM UserInEvent u WHERE u.user=:user AND u.eventRate>=1 AND u.eventRate <=5")
+	Double averageEventUserRate(@Param("user") User user);
+	
+	@Query("SELECT COUNT(u) FROM UserInEvent u WHERE u.user=:user")
+	int countContestantInEventUser(@Param("user") User user);
 	
 }

@@ -41,7 +41,7 @@ public class DepartmentCompanyController {
 	CompanyRepository companyRepository;
 	
     @PostMapping("/department")
-	@PreAuthorize("hasRole('MODERATOR')")
+	@PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> createDepartment(@Valid @RequestBody DepRequest depRequest) {
     	
 		if (departmentRepository.existsByName(depRequest.getName())) {

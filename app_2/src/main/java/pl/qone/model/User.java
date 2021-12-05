@@ -10,6 +10,8 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Where;
+
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
@@ -18,6 +20,7 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 		uniqueConstraints = { 
 			@UniqueConstraint(columnNames = "email") 
 		})
+@Where(clause = "deleted = 0")
 public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +38,9 @@ public class User {
 	
 	@Size(max = 12)
 	private String phone;
+	
+	@NotBlank
+	private int deleted;
 
 	//relacja wiele-do-wielu z tabelą roles po kluczach glownych id
 	//powstaje nowa tabela pośredniczaca - user_roles
@@ -139,5 +145,13 @@ public class User {
 	public void removeUser(UserInEvent user) {
 		users.remove(user);
 		user.setUser(null);
+	}
+
+	public int getDeleted() {
+		return deleted;
+	}
+
+	public void setDeleted(int deleted) {
+		this.deleted = deleted;
 	}
 }

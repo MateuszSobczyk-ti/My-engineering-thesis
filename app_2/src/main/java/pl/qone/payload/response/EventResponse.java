@@ -20,7 +20,7 @@ public class EventResponse {
 	private boolean czyZapisano;
 	private boolean czyMoznaZapisac;
 	private boolean czyMoznaOceniac;
-	private int rate;
+	private float rate;
 	private String comments;
 	private String organizer;
 	private String place;
@@ -28,7 +28,7 @@ public class EventResponse {
 	
 	public EventResponse(Long id, String name, String description, int max_number_of_contestant, Date data_start, Date data_end,
 			String department, String eventType, StatusEventEnum statusEvent, String imageData, long imageSize, boolean czyZapisano, 
-			boolean czyMoznaZapisac, boolean czyMoznaOceniac, int rate, String comments, String organizer, String place) {
+			boolean czyMoznaZapisac, boolean czyMoznaOceniac, float rate, String comments, String organizer, String place) {
 		this.id = id;
 		this.name = name;
 		this.description = description;
@@ -132,7 +132,7 @@ public class EventResponse {
 	public void setCzyMoznaOceniac(boolean czyMoznaOceniac) {
 		this.czyMoznaOceniac = czyMoznaOceniac;
 	}
-	public int getRate() {
+	public float getRate() {
 		return rate;
 	}
 	public void setRate(int rate) {

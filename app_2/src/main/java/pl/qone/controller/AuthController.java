@@ -65,7 +65,7 @@ public class AuthController {
 	
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
-
+		
 		Authentication authentication = authenticationManager.authenticate(
 				new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
 
@@ -77,17 +77,11 @@ public class AuthController {
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
  
-		String depName = userDetails.getDepartment() == null ? null : userDetails.getDepartment().getName();
-		String compName = userDetails.getCompany() == null ? null : userDetails.getCompany().getName();
-		String compNip = userDetails.getCompany() == null ? null : userDetails.getCompany().getNip();
 		return ResponseEntity.ok(new JwtResponse(jwt, 
 												 userDetails.getId(), 
 												 userDetails.getUsername(), 
 												 userDetails.getPhone(),
-												 roles,
-												 depName,
-												 compName,
-												 compNip
+												 roles
 												 ));
 	}
 	
@@ -172,6 +166,7 @@ public class AuthController {
 					comp.addUser(user);
 				} 
 			}
+			user.setDeleted(0);
 			userRepository.save(user);
 
 			return ResponseEntity.ok(new MessageResponse("User registered successfully!"));

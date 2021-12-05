@@ -1,5 +1,8 @@
 package pl.qone.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +13,7 @@ import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +26,7 @@ import pl.qone.model.UserInEvent;
 import pl.qone.payload.request.EnrollRequest;
 import pl.qone.payload.request.RateRequest;
 import pl.qone.payload.response.MessageResponse;
+import pl.qone.payload.response.UserResponse;
 import pl.qone.repository.EventRepository;
 import pl.qone.repository.UserInEventRepository;
 import pl.qone.repository.UserRepository;
@@ -143,6 +148,35 @@ public class EnrollAndRateController {
 		} catch (Exception e) {
 			message = "cannot save rate";
 			return ResponseEntity.status(HttpStatus.EXPECTATION_FAILED).body(new MessageResponse(message));
+		}
+	}
+	
+	
+	@GetMapping("/user")
+	@PreAuthorize("hasRole('USER')")
+	public ResponseEntity<?> getUserData() {
+		User user = null;
+		Double avgRate = null;
+		int numberSigned = 0;
+		UserResponse singleUserRes = null;
+		
+		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+		if (!(authentication instanceof AnonymousAuthenticationToken)) {
+			String currentPrincipalName = authentication.getName();
+			user = userRepository.findByUsername(currentPrincipalName).orElse(null);
+		}
+		
+		try {
+			if (user != null) {
+				avgRate = userInEventRepository.averageEventUserRate(user);
+				numberSigned = userInEventRepository.countContestantInEventUser(user);
+				singleUserRes = new UserResponse(user.getId(), user.getUsername(), user.getPhone(), 
+						user.getDepartment()==null ? null : user.getDepartment().getName(), 
+						user.getCompany()==null ? null : user.getCompany().getName(), user.getRoles(), avgRate, numberSigned);
+			}
+			return ResponseEntity.ok(singleUserRes);
+		} catch (Exception e) {
+   	        return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }

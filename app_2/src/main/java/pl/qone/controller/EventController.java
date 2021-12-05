@@ -183,7 +183,6 @@ public class EventController {
 	
 	@PutMapping("/event/{id}")
 	public ResponseEntity<Event> updateEvent(@PathVariable("id") long id, @RequestBody EventRequest eventRequest) {
-		System.out.println("id = " + id);
 		Optional<Event> eventData = eventRepository.findById(id);
 		Authentication authentication;
 		User user = null;
@@ -291,7 +290,8 @@ public class EventController {
 		String data = null, organizer = null;
 		long imageSize = 0;
 		boolean czyZapisano = false, czyMoznaZapisac = false, czyMoznaOceniac = false;
-		int contestantsInEvent = 0, rate = 0;
+		int contestantsInEvent = 0;
+		float rate = 0;
 		User user;
 		Authentication authentication;
 		LocalDate localDate = LocalDate.now();
@@ -324,6 +324,7 @@ public class EventController {
 					czyZapisano = false;
 					rate = 0;
 				}
+
 				contestantsInEvent = userInEventRepository.countContestantInEvent(e);
 				if (contestantsInEvent < e.getMax_number_of_contestant() && e.getStatusEvent().getName().equals(StatusEventEnum.ZAAKCEPTOWANY) &&
 						e.getData_end().after(java.sql.Date.valueOf(localDate))) {
@@ -331,7 +332,6 @@ public class EventController {
 				} else {
 					czyMoznaZapisac = false;
 				}
-				
 				if (czyZapisano && e.getStatusEvent().getName().equals(StatusEventEnum.ZAAKCEPTOWANY)
 						&& e.getData_start().before(java.sql.Date.valueOf(localDate)) ) {
 					czyMoznaOceniac = true;

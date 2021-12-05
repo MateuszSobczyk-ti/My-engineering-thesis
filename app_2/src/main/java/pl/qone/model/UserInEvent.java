@@ -1,5 +1,7 @@
 package pl.qone.model;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -10,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.Digits;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -21,7 +24,8 @@ public class UserInEvent {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Long id;
 	@Column
-	private int eventRate;
+	@Digits(integer=1, fraction=2)
+	private float eventRate;
 	@JsonBackReference
 	@ManyToOne(fetch = FetchType.LAZY)
 	private User user;
@@ -46,11 +50,11 @@ public class UserInEvent {
 		this.id = id;
 	}
 
-	public int getEventRate() {
+	public float getEventRate() {
 		return eventRate;
 	}
 
-	public void setEventRate(int eventRate) {
+	public void setEventRate(float eventRate) {
 		this.eventRate = eventRate;
 	}
 

@@ -10,19 +10,13 @@ public class JwtResponse {
 	private String username;
 	private String phone;
 	private List<String> roles;
-	private String department;
-	private String companyName;
-	private String companyNip;
 
-	public JwtResponse(String accessToken, Long id, String username, String phone, List<String> roles, String department, String companyName, String companyNip) {
+	public JwtResponse(String accessToken, Long id, String username, String phone, List<String> roles) {
 		this.token = accessToken;
 		this.id = id;
 		this.username = username;
 		this.phone = phone;
 		this.roles = roles;
-		this.department = department;
-		this.companyName = companyName;
-		this.companyNip = companyNip;
 	}
 
 	public String getAccessToken() {
@@ -67,30 +61,6 @@ public class JwtResponse {
 
 	public List<String> getRoles() {
 		return roles;
-	}
-
-	public String getDepartment() {
-		return department;
-	}
-
-	public void setDepartment(String department) {
-		this.department = department;
-	}
-
-	public String getCompanyName() {
-		return companyName;
-	}
-
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
-
-	public String getCompanyNip() {
-		return companyNip;
-	}
-
-	public void setCompanyNip(String companyNip) {
-		this.companyNip = companyNip;
 	}
 	
 }

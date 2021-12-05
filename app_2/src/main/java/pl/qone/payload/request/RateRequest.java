@@ -4,7 +4,7 @@ public class RateRequest {
 
 	private String eventId;
 	private String userId;
-	private int rate;
+	private float rate;
 	
 	public String getEventId() {
 		return eventId;
@@ -18,10 +18,10 @@ public class RateRequest {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-	public int getRate() {
+	public float getRate() {
 		return rate;
 	}
-	public void setRate(int rate) {
+	public void setRate(float rate) {
 		this.rate = rate;
 	}
 	
