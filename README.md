@@ -24,3 +24,11 @@ will reach more students. Another advantages is:
 - company employee - this type can register company in system, create event notification and see status of his notification.
 - department employee - this user has the same privileges as above and what's more he is responsible for considering event notification.
 - admin - this user can also show statement about event marks or popularity and he manages users in system.
+
+## Author
+Mateusz Sobczyk - [LinkedIn](https://www.linkedin.com/in/mateusz-sobczyk-635320164/)
+
+## License
+The MIT License (MIT)
+
+Copyright (c) 2022 Mateusz Sobczyk
