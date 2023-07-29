@@ -1,4 +1,4 @@
-# springboot-project1
+# My engineering thesis
 This is web application written with Java language and Spring Boot framework. It is using to manage events at univesristies. 
 The application is my engineering thesis and there is also mobile app created by my colleague. This two app - mobile and web - make single system.
 
